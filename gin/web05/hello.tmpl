@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>Hello</title>
+</head>
+<body>
+    <p>{{.}}</p>
+    <p>Hello {{.u1.Name}}</p> <!--.代表接收后台的全部内容-->
+    <p>性别 {{.u1.Gender}}</p> <!--小写的私有属性不能访问，一但调用错误属性，后面调用结果，全不可见-->
+    <p>年龄 {{.u1.Age}}</p>
+    <!--接收map里的多个参数-->
+    <p>Hello {{.m1.name}}</p>
+    <p>性别 {{.m1.gender}}</p>
+    <p>年龄 {{.m1.age}}</p>
+    <!--在模板中定义变量,变量加$-->
+    {{$v1:=100}}
+    <!--条件判断-->
+    {{if $v1}}
+        {{$v1}}<!--如果有值就显示-->
+    {{else}}<!--还有else if-->
+    <p>2222</p>
+    {{end}}
+    {{if gt .u1.Age 18}}
+        <p>hello, old man, {{.u1.Name}}</p>
+    {{else}}
+        <p>hello,young man, {{.u1.Name}}</p>
+    {{end}}
+
+    <!--模板遍历读取map中的数组-->
+    {{range $index,$hobby :=.hobby}}
+        <p>{{$index}} -  {{$hobby}}</p>
+    {{else}}
+        内容为空
+    {{end}}
+
+
+    {{with .m1}}
+        {{.name}} <!--在with里临时使用.来代替.m1-->
+    {{end}}
+
+</body>
+</html>
