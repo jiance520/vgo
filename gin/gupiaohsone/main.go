@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/360EntSecGroup-Skylar/excelize"
 	"html/template"
 	"io/ioutil"
 	"net/http"
@@ -98,12 +99,26 @@ func Getaction(w http.ResponseWriter, r *http.Request) {
 
 }
 func main() {
-	http.HandleFunc("/", Getaction)
-	err := http.ListenAndServe(":9000", nil)
-	if err != nil {
-		fmt.Printf("HTTP server start failed,err:%v", err)
-	}
+	//http.HandleFunc("/", Getaction)
+	//err := http.ListenAndServe(":9000", nil)
+	//if err != nil {
+	//	fmt.Printf("HTTP server start failed,err:%v", err)
+	//}
 
+	//Go 语言读写 Excel
+	//https://blog.csdn.net/mrxuri/article/details/53842834?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.nonecase
+	f := excelize.NewFile()
+	// 创建一个工作表
+	index := f.NewSheet("7.20")
+	// 设置单元格的值
+	f.SetCellValue("7.20", "A2", "Hello world.")
+	//f.SetCellValue("Sheet1", "B2", 100)
+	// 设置工作簿的默认工作表
+	f.SetActiveSheet(index)
+	// 根据指定路径保存文件
+	if err := f.SaveAs("/gin/gupiaohsone/Book1.xlsx"); err != nil {
+		println(err.Error())
+	}
 }
 
 //1.股票查询

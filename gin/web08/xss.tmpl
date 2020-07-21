@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>xss</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width-dervice-width,initial-scale-1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie-edge"/>
+
+
+</head>
+<body>
+<div>用户的评论是：{{.str1}}</div> //js代码以文本形式显示
+<div>用户的评论是：{{safe .str2}}</div> //js代码正常显示
+<div>用户的评论是：{{.str2 | safe}} //使用管道符|处理</div>
+</body>
+</html>
