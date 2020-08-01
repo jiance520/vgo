@@ -22,7 +22,7 @@ func main() {
 		var u UserInfo
 		err := context.ShouldBind(&u) //必须传递地址，才能修改值
 		if err != nil {
-			context.JSON(http.StatusOK, gin.H{
+			context.JSON(http.StatusBadRequest, gin.H{
 				"error": err.Error(),
 			})
 		} else {
